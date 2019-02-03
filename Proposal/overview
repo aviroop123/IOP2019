@@ -1,5 +1,20 @@
-The evaluation of the product of two matrices is computationally expensive. The most commonly used algorithm to compute multiplcation is O(n^3). If the multiplication of two matrices can be done in O(n^a), then the least upper bound for a is called the exponent of matrix multiplication and is denoted by w. Though the asymptotically best method for computing product of two matrices is O(n^2.373), they are rarely used in software packages due to heavy implementation. The importance of matrix multiplication lies on the fact that many algorithms is heavily dependent on it. For example, in graph theory, the number of paths of length k between two nodes in a graph can be calculated by exponentiating the adjacency matrix of the graph to the power k. The Transformation matrix is a very practical matrix in both robotics and image processing. It also finds application in machine learning and artificial intelligence.
+The evaluation of the product of two matrices is computationally expensive. 
+The most commonly used algorithm to compute multiplcation is O(n^3). 
+If the multiplication of two matrices can be done in O(n^a), then the least upper bound for a is called the exponent 
+of matrix multiplication and is denoted by w. 
+Though the asymptotically best method for computing product of two matrices is O(n^2.373), 
+they are rarely used in software packages due to heavy implementation. 
+The importance of matrix multiplication lies on the fact that many algorithms is 
+heavily dependent on it. For example, in graph theory, the number of paths of length k 
+between two nodes in a graph can be calculated by exponentiating the adjacency matrix of the graph to the power k. 
+The Transformation matrix is a very practical matrix in both robotics and image processing.
+It also finds application in machine learning and artificial intelligence.
 
-Our aim will be to study about some algorithms of matrix multiplication ( Strassen's algorithm, Coppersmith and Winograd's algorithm to name a few) and implement these algorithms in C++ which can be used as a template library. The library will also include algorithms for matrix inversion and finding roots of a matrix. We'll determine benchmarks for each algorithms implemented and find bounds where each algorithm will be most efficient.
+Our aim will be to study about some algorithms of matrix multiplication 
+(Strassen's algorithm, Coppersmith and Winograd's algorithm to name a few) and implement these algorithms in C++ which can 
+be used as a template library. The library will also include algorithms for matrix inversion and finding roots of a matrix. 
+We'll determine benchmarks for each algorithms implemented and find bounds where each algorithm will be most efficient.
 
-This library will be helpful to those who are working in image processing, robotics, machine learning, artificial intelligence etc. Since matrix multiplication is at a foundation level of matrix arithmetic, many operations will speed up. So they'll be able to deal with larger matrices and their efficiently will improve. 
+This library will be helpful to those who are working in image processing, robotics, machine learning, 
+artificial intelligence etc. Since matrix multiplication is at a foundation level of matrix arithmetic, 
+many operations will speed up. So they'll be able to deal with larger matrices and their efficiently will improve. 
