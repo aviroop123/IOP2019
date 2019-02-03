@@ -1,0 +1,4 @@
+1) Study the various methods involving matrix multiplication and their time complexity. 
+2) Determine benchmarks for each method and determine in which situation, which method will be most efficient.
+3) Use the different methods of multiplication in computing the inverse and the root of a matrix.
+4) Implement these methods in C++ to be used as a template library.
