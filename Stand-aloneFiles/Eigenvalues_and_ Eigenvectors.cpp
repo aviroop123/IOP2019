@@ -9,7 +9,7 @@ void print(matrix A){
 	int n = A.size();
 	for(int i = 0; i < n; i++){
 		for(int j = 0; j < n; j++){
-			if(fabs(A[i][j]) < 1e-9)
+			if(fabs(A[i][j]) < 1e-5)
 				A[i][j] = 0;
 			cout << A[i][j] << " ";
 		}
@@ -59,7 +59,7 @@ matrix Gram_Schmidt(matrix A){
 			mag += v[i]*v[i];
 		mag = sqrt(mag);
 		for(int i = 0; i < n; i++)
-			A[i][j] = v[i]/mag;		//normalize v
+			A[i][j] = -1*v[i]/mag;		//normalize v
 	}
 	return A;
 }
@@ -79,12 +79,16 @@ signed main() {
 		}
 	}
 	int k = 30;
+	matrix Q, R, eigenvectors(n, vector<f80>(n, 0));
+	for(int i = 0; i < n; i++)
+		eigenvectors[i][i] = 1;
 	while(k--){
-		matrix Q = Gram_Schmidt(A);
-		matrix R = multiply(transpose(Q), A);
+		Q = Gram_Schmidt(A);
+		R = multiply(transpose(Q), A);
+		eigenvectors = multiply(eigenvectors, Q);
 		A = multiply(R, Q);
 	}
-	for(int i = 0; i < n; i++)
-		cout << A[i][i] << " ";
+	print(A);
+	print(eigenvectors);
 	return 0;
 }
