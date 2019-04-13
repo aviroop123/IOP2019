@@ -59,7 +59,7 @@ matrix Gram_Schmidt(matrix A){
 			mag += v[i]*v[i];
 		mag = sqrt(mag);
 		for(int i = 0; i < n; i++)
-			A[i][j] = v[i]/mag;		//normalize v
+			A[i][j] = -1*v[i]/mag;		//normalize v
 	}
 	return A;
 }
