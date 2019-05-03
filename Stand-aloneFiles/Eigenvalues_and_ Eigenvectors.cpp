@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-typedef long double f80;
+typedef complex<long double> cmx;
 
-const f80 eps = 1e-7;
+const long double eps = 1e-7;
 
-typedef vector<vector<f80>> matrix;
+typedef vector<vector<cmx>> matrix;
 
 void print(matrix A){
     int n = A.size();
@@ -30,7 +30,7 @@ matrix transpose(matrix A){
 
 matrix multiply(matrix A, matrix B){
     int n = A.size();
-    matrix C(n, vector<f80>(n, 0));
+    matrix C(n, vector<cmx>(n, 0));
     for(int k = 0; k < n; k++)
         for(int i = 0; i < n; i++)
             for(int j = 0; j < n; j++)
@@ -41,14 +41,14 @@ matrix multiply(matrix A, matrix B){
 matrix Gram_Schmidt(matrix A){
     int n = A.size();
     for(int j = 0; j < n; j++){     //Gram-Schmidt's orthogonalisation
-        vector<f80> v;
-        f80 mag = 0;    
+        vector<cmx> v;
+        cmx mag = 0;    
         for(int i = 0; i < n; i++){
             v.push_back(A[i][j]);   // v initialised as column of A
             mag += v[i] * v[i];
         }
         for(int i = 0; i < j; i++){
-            f80 dot = 0;
+            cmx dot = 0;
             for(int k = 0; k < n; k++)
                 dot += A[k][j] * A[k][i];   //dot product
             for(int k = 0; k < n; k++)
@@ -57,18 +57,18 @@ matrix Gram_Schmidt(matrix A){
         mag = 0;
         for(int i = 0; i < n; i++)
             mag += v[i] * v[i];
-        mag = sqrtl(mag);
+        mag = sqrt(mag);
         for(int i = 0; i < n; i++)
-            A[i][j] = -1 * v[i] / mag;      //normalize v
+            A[i][j] = cmx(-1, 0) * v[i] / mag;      //normalize v
     }
     return A;
 }
 
-vector<f80> get_eigenvalues(matrix A){
+vector<cmx> get_eigenvalues(matrix A){
     int n = A.size();
     int k = 80; // number of iterations
-    matrix Q, R, eigenvectors(n, vector<f80>(n, 0));
-    vector<f80> eigenvalues;
+    matrix Q, R, eigenvectors(n, vector<cmx>(n, 0));
+    vector<cmx> eigenvalues;
     while(k--){
         Q = Gram_Schmidt(A);
         R = multiply(transpose(Q), A);
@@ -91,7 +91,7 @@ matrix forward_elimination(matrix A){
         if(val < eps) continue;
         swap(A[i], A[piv]);
         for(int j = i + 1; j < n; j++){
-            f80 val = A[j][i] / A[i][i];
+            cmx val = A[j][i] / A[i][i];
             for(int k = i; k < n; k++)
                 A[j][k] -= val * A[i][k];
         }
@@ -99,16 +99,16 @@ matrix forward_elimination(matrix A){
     return A;
 }
 
-matrix get_eigenvectors(matrix A, vector<f80> lambda){
+matrix get_eigenvectors(matrix A, vector<cmx> lambda){
     int n = A.size();
-    matrix B(n, vector<f80>(n, 0));
+    matrix B(n, vector<cmx>(n));
     int c = 1, t = 0;
     for(auto x : lambda){
         matrix C = A;
         for(int i = 0; i < n; i++)
             C[i][i] -= x;
         C = forward_elimination(C);
-        vector<f80> ans(n, 0);
+        vector<cmx> ans(n, 0);
         for(int i = n - 1; i >= 0; i--){
             if(abs(C[i][i]) < eps)
                 ans[i] = c++;
@@ -125,8 +125,12 @@ matrix get_eigenvectors(matrix A, vector<f80> lambda){
     return B;
 }
 signed main(){
-    matrix A = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
-    vector<f80> lambda = get_eigenvalues(A);
+    matrix A = {{1, -3, 3}, {3, -5, 3}, {6, -6, 4}};
+    vector<cmx> lambda = get_eigenvalues(A);
+    for(auto x : lambda){
+        cout << x << " ";
+    }
+    cout << endl;
     print(get_eigenvectors(A, lambda));
     return 0;
 }
