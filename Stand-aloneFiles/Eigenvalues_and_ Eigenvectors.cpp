@@ -83,10 +83,10 @@ vector<cmx> get_eigenvalues(matrix A){
 matrix forward_elimination(matrix A){
     int n = A.size();
     for(int i = 0; i < n; i++){
-        int piv = i, val = abs(A[i][i]);
+        int piv = i; long double val = abs(A[i][i]);
         for(int j = i + 1; j < n; j++){ // pivoting
-            if(abs(A[i][i]) > val)
-                val = abs(A[i][i]), piv = j;
+            if(abs(A[j][i]) > val)
+                val = abs(A[j][i]), piv = j;
         }
         if(val < eps) continue;
         swap(A[i], A[piv]);
@@ -125,7 +125,7 @@ matrix get_eigenvectors(matrix A, vector<cmx> lambda){
     return B;
 }
 signed main(){
-    matrix A = {{1, -3, 3}, {3, -5, 3}, {6, -6, 4}};
+    matrix A = {{0.7, 0.2, 0.1}, {0.2, 0.5, 0.3}, {0, 0, 1}};
     vector<cmx> lambda = get_eigenvalues(A);
     for(auto x : lambda){
         cout << x << " ";
