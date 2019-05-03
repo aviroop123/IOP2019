@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
  
-#define ld long double
+typedef complex<long double> cmx;
 
 const int mod = 1e9 + 7;
 
@@ -10,7 +10,7 @@ const int NN = 101;
 
 class matrix{
 public:
-    ld mat[NN][NN];
+   	cmx mat[NN][NN];
     matrix(){
         for(int i = 0; i < NN; i++)
             for(int j = 0; j < NN; j++)
@@ -74,9 +74,13 @@ signed main() {
 	cout << "Enter size of matrix:\n";
 	cin >> sz;
 	cout << "Enter elements of matrix:\n";
-	for(int i = 0; i < sz; i++)
-		for(int j = 0; j < sz; j++)
-			cin >> a.mat[i][j];
+	for(int i = 0; i < sz; i++){
+		for(int j = 0; j < sz; j++){
+			long double x, y;
+			cin >> x >> y;
+			a.mat[i][j] = {x, y};
+		}
+	}
 	cout << "Enter power to be raised:\n";
 	cin >> p;
 	a = pow(a, p);
